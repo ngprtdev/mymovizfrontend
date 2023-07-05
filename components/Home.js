@@ -13,7 +13,7 @@ function Home() {
   useEffect(() =>{
     fetch('https://mymovizbackend-inky.vercel.app/movies')
     .then(response => response.json())
-    .then(data => {
+    .then(data => {a
       console.log(data)
       setMoviesFetch(data.movies)})
   }
