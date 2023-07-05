@@ -19,7 +19,6 @@ function Home() {
   }
   , [])
 
-
   // Liked movies (inverse data flow)
   const updateLikedMovies = (movieTitle) => {
     if (likedMovies.find(movie => movie === movieTitle)) {
