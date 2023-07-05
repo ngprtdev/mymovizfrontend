@@ -10,14 +10,15 @@ function Home() {
   const [likedMovies, setLikedMovies] = useState([]);
   const [moviesFetch, setMoviesFetch] = useState([])
 
-  useEffect(() =>{
+  useEffect(() => {
     fetch('https://mymovizbackend-inky.vercel.app/movies')
-    .then(response => response.json())
-    .then(data => {a
-      console.log(data)
-      setMoviesFetch(data.movies)})
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setMoviesFetch(data.movies)
+      })
   }
-  , [])
+    , [])
 
   // Liked movies (inverse data flow)
   const updateLikedMovies = (movieTitle) => {
@@ -43,30 +44,22 @@ function Home() {
     </div>
   );
 
-  // Movies list
-  const moviesData = [
-    { title: 'Forrest Gump', poster: 'forrestgump.jpg', voteAverage: 9.2, voteCount: 22_705, overview: 'A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case.' },
-    { title: 'The Dark Knight', poster: 'thedarkknight.jpg', voteAverage: 8.5, voteCount: 27_547, overview: 'Batman raises the stakes in his war on crime and sets out to dismantle the remaining criminal organizations that plague the streets.' },
-    { title: 'Your name', poster: 'yourname.jpg', voteAverage: 8.5, voteCount: 8_691, overview: 'High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places.' },
-    { title: 'Iron Man', poster: 'ironman.jpg', voteAverage: 7.6, voteCount: 22_7726, overview: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.' },
-    { title: 'Inception', poster: 'inception.jpg', voteAverage: 8.4, voteCount: 31_546, overview: 'Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life.' },
-  ];
-  
+
   const movies = moviesFetch.map((data, i) => {
     let overview = data.overview
-    if(overview.length > 250){
-       overview = overview.substring(0, 250) + "..."
+    if (overview.length > 250) {
+      overview = overview.substring(0, 250) + "..."
     }
 
     const isLiked = likedMovies.some(movie => movie === data.title);
     return <Movie key={i}
-    updateLikedMovies={updateLikedMovies}
-    isLiked={isLiked}
-    title={data.title}
-    overview={overview}
-    poster={data.poster_path}
-    voteAverage={data.vote_average}
-    voteCount={data.vote_count} />;
+      updateLikedMovies={updateLikedMovies}
+      isLiked={isLiked}
+      title={data.title}
+      overview={overview}
+      poster={data.poster_path}
+      voteAverage={data.vote_average}
+      voteCount={data.vote_count} />;
   });
 
   return (
